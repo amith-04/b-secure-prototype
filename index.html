@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>B-Secure | Check every claim before it is published</title>
+<meta name="description" content="B-Secure checks marketing content against approved brand rules and facts, explains each flag with evidence, and leaves the final decision to a person.">
+<meta name="referrer" content="no-referrer">
+<style>
+@font-face{font-family:"Instrument Serif";src:local("Instrument Serif"),url(fonts/InstrumentSerif-Regular.woff2) format("woff2");font-display:swap}
+:root{color-scheme:light;--bg:#FDFBF7;--card:#fff;--ink:#1A1A1A;--mut:#5A5A52;--line:#E4DFD3;--pri:#4F5E26;--priink:#fff;--soft:#EEF0DF;--sand:#F4EFE4;--ok:#3F6A2B;--okbg:#E8F0DD;--warn:#7A5410;--warnbg:#F6ECD2;--bad:#9B2C22;--badbg:#F7E1DC;--ai:#33446B;--aibg:#E6EAF2;
+--serif:"Instrument Serif","Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;--sans:"Instrument Sans","Avenir Next","Segoe UI",system-ui,-apple-system,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.65 var(--sans);-webkit-font-smoothing:antialiased;padding-bottom:env(safe-area-inset-bottom,0px)}
+a{color:var(--pri)}:focus-visible{outline:3px solid var(--pri);outline-offset:3px;border-radius:4px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:#fff;padding:10px 16px;z-index:20}.skip:focus{left:8px}
+.wrap{max-width:1120px;margin:auto;padding:0 24px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;letter-spacing:-.01em;line-height:1.12;margin:0 0 14px}
+h1{font-size:clamp(44px,7vw,80px)}h2{font-size:clamp(32px,4.5vw,50px)}h3{font-size:26px}h4{font-size:17px;margin:14px 0 6px}
+p{margin:0 0 14px}.mut{color:var(--mut)}.sm{font-size:15px}.sp{flex:1}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--pri);margin:0 0 14px}
+nav{display:flex;align-items:center;gap:28px;padding:22px 0;flex-wrap:wrap}
+.mark{font-family:var(--serif);font-size:30px;text-decoration:none;color:var(--ink)}.mark b{font-weight:400;color:var(--pri)}
+nav a.l{color:var(--ink);text-decoration:none;font-size:15px;font-weight:500}nav a.l:hover{text-decoration:underline}
+.btn,button{font:inherit;font-size:16px;font-weight:600;border-radius:999px;border:1px solid var(--ink);background:transparent;color:var(--ink);padding:10px 22px;cursor:pointer;text-decoration:none;display:inline-block;transition:background .25s,color .25s,border-color .25s}
+.btn.solid,button.pri{background:var(--pri);border-color:var(--pri);color:var(--priink)}.btn.solid:hover,button.pri:hover{background:#3E4B1D}
+button:hover:not(.pri):not(.tab):not(.role):not(:disabled){background:var(--sand)}button:disabled{opacity:.6;cursor:wait}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;padding:48px 0 72px}
+.hero p.lead{font-size:20px;max-width:560px;color:var(--mut)}.hero h1 em{font-style:italic;color:var(--pri)}
+.cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:26px}
+.strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--sand)}
+.strip .wrap{display:grid;grid-template-columns:auto 1fr 1fr 1fr;gap:32px;padding-top:26px;padding-bottom:26px;align-items:start}
+.strip strong{display:block;font-family:var(--serif);font-weight:400;font-size:22px;line-height:1.2;margin-bottom:4px}
+section{padding:80px 0}.pair{display:grid;grid-template-columns:5fr 6fr;gap:64px;align-items:center;margin-top:56px}
+.pair.flip{grid-template-columns:6fr 5fr;margin-left:48px}.pair.flip .art{order:-1}.art svg{width:100%;height:auto;display:block;border-radius:14px}
+.num{font-family:var(--serif);font-size:64px;color:var(--pri);line-height:1;margin-bottom:8px}
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}.q:nth-child(2){margin-top:36px}.q:nth-child(3){margin-top:12px}
+.q{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:28px;margin-bottom:0}.q blockquote{margin:16px 0 20px;font-family:var(--serif);font-size:23px;line-height:1.3}
+.q figure{margin:0;display:flex;gap:14px;align-items:center}.q svg{width:64px;height:64px;border-radius:50%;flex:none}.q figcaption{font-size:15px;line-height:1.35}
+.priv{background:var(--ink);color:#F3EFE4}.priv .eyebrow{color:#C9D58F}.priv h2{max-width:720px}.priv ul{list-style:none;padding:0;margin:36px 0 0;display:grid;grid-template-columns:repeat(2,1fr);gap:24px 56px}
+.priv li{border-top:1px solid #4a4a44;padding-top:14px}.priv li b{display:block;font-family:var(--serif);font-weight:400;font-size:23px;margin-bottom:4px}.priv p,.priv li span{color:#CFCABA}
+.demo{background:var(--sand);border-top:1px solid var(--line)}.apphead{display:flex;align-items:center;gap:16px;margin:18px 0 8px;min-height:44px}
+#app{min-height:420px}footer{padding:36px 0 48px;font-size:15px;color:var(--mut)}footer .wrap{display:flex;gap:24px;flex-wrap:wrap;align-items:center}
+/* app */
+#app h3{font-size:28px}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;margin-bottom:18px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin-top:20px}
+.role{cursor:pointer;text-align:left;font:inherit;color:inherit;border-radius:14px;transition:border-color .3s,transform .3s}.role:hover{border-color:var(--pri);transform:translateY(-3px)}
+.role ul{padding-left:20px;margin:10px 0 16px}.ico{width:48px;height:48px;border-radius:50%;background:var(--soft);color:var(--pri);display:grid;place-items:center;margin-bottom:12px}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin:14px 0 22px;flex-wrap:wrap}
+.tab{border:0;border-bottom:2px solid transparent;border-radius:0;padding:10px 14px;background:none}.tab.on{border-color:var(--pri);color:var(--pri)}
+button.ok{background:var(--ok);border-color:var(--ok);color:#fff}button.bad{background:var(--bad);border-color:var(--bad);color:#fff}
+textarea,input,select{font:inherit;font-size:16px;width:100%;padding:11px 14px;border:1px solid #B9B3A3;border-radius:10px;background:#fff;color:var(--ink)}
+input[type=checkbox]{width:20px;height:20px;accent-color:var(--pri)}textarea{min-height:150px;resize:vertical}label{display:block;font-weight:600;font-size:15px;margin:14px 0 5px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+.chip{font-size:14px;padding:6px 14px}.sw{display:flex;gap:12px;align-items:center}.sw label{margin:0}
+.badge{display:inline-block;font-size:13px;font-weight:700;padding:3px 11px;border-radius:99px;background:var(--line);color:var(--ink)}
+.High,.Rejected{background:var(--badbg);color:var(--bad)}.Medium,.Pending,.Needs,.Changes{background:var(--warnbg);color:var(--warn)}.Approved,.clean{background:var(--okbg);color:var(--ok)}.ai{background:var(--aibg);color:var(--ai)}.rule{background:var(--sand);color:var(--mut)}
+.f{border:1px solid var(--line);border-left:4px solid var(--warn);border-radius:10px;padding:16px;margin-bottom:12px;background:#fff}.f.High{border-left-color:var(--bad)}.tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+mark{background:var(--warnbg);color:var(--warn);padding:1px 6px;border-radius:4px;font-weight:600}.sug{background:var(--okbg);border-radius:10px;padding:11px 14px;margin-top:8px;font-size:16px}
+.note{background:var(--aibg);border-radius:10px;padding:12px 16px;margin-bottom:14px;font-size:15px}
+table{width:100%;border-collapse:collapse;font-size:15px}th,td{text-align:left;padding:11px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+.bartrack{background:var(--line);border-radius:6px;height:10px;overflow:hidden}.bartrack i{display:block;height:100%;background:var(--pri);transform-origin:left;animation:grow 1s ease both}.gauge{height:12px}
+.stat{font-family:var(--serif);font-size:44px;line-height:1.1}.spin{display:inline-block;width:14px;height:14px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:s 1s linear infinite;vertical-align:-2px;margin-right:8px}
+.scan{position:relative;overflow:hidden;text-align:center;padding:36px 12px;border-radius:12px;background:var(--soft)}.beam{position:absolute;left:0;right:0;height:54px;top:-54px;background:linear-gradient(180deg,transparent,rgba(79,94,38,.22),transparent);animation:beam 1.8s ease-in-out infinite}
+#app.view>*{animation:fade .5s ease both}.f{animation:fade .5s ease both}
+html.js .rv{opacity:0;transform:translateY(14px);transition:opacity .9s ease,transform .9s ease}html.js .rv.in{opacity:1;transform:none}
+@keyframes fade{from{opacity:0}to{opacity:1}}@keyframes grow{from{transform:scaleX(0)}to{transform:none}}@keyframes s{to{transform:rotate(360deg)}}@keyframes beam{to{top:100%}}
+@media(max-width:860px){.hero,.pair,.pair.flip{grid-template-columns:1fr;gap:32px;margin-left:0}.pair.flip .art{order:0}.strip .wrap,.quotes,.priv ul{grid-template-columns:1fr}.q:nth-child(n){margin-top:0}section{padding:56px 0}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}html.js .rv{opacity:1;transform:none}}
+</style></head>
+<body>
+<a class="skip" href="#demo">Skip to the demo</a>
+<header class="wrap"><nav aria-label="Main"><a class="mark" href="#top">B-<b>Secure</b></a><span class="sp"></span>
+<a class="l" href="#who">Who it is for</a><a class="l" href="#how">How it works</a><a class="l" href="#voices">Voices</a><a class="l" href="#privacy">Privacy</a><a class="btn solid" href="#demo">Try the demo</a></nav></header>
+<main id="top">
+<div class="wrap hero">
+<div class="rv"><p class="eyebrow">Pre-publication governance</p><h1>Check every claim <em>before</em> it reaches the world.</h1>
+<p class="lead">B-Secure reviews marketing content against your approved brand rules and facts, shows the evidence behind each flag, and leaves the final decision to a named person.</p>
+<div class="cta"><a class="btn solid" href="#demo">Try the demo</a><a class="btn" href="#how">See how it works</a></div></div>
+<div class="rv"><svg viewBox="0 0 480 520" role="img" aria-label="A draft with one highlighted claim and a margin note that cites an approved rule"><circle cx="388" cy="96" r="78" fill="#EFE8DA"/><rect x="36" y="34" width="304" height="440" rx="12" fill="#fff" stroke="#E4DFD3"/><rect x="66" y="70" width="130" height="12" rx="6" fill="#1A1A1A"/><g fill="#DDD7C8"><rect x="66" y="110" width="244" height="8" rx="4"/><rect x="66" y="132" width="220" height="8" rx="4"/><rect x="66" y="154" width="240" height="8" rx="4"/><rect x="66" y="260" width="236" height="8" rx="4"/><rect x="66" y="282" width="190" height="8" rx="4"/><rect x="66" y="330" width="244" height="8" rx="4"/><rect x="66" y="352" width="210" height="8" rx="4"/></g><rect x="62" y="190" width="250" height="52" rx="6" fill="#E3E8C9"/><rect x="66" y="198" width="238" height="8" rx="4" fill="#9AA66B"/><rect x="66" y="222" width="150" height="8" rx="4" fill="#9AA66B"/><path d="M312 216 C 340 216 340 196 366 196" stroke="#4F5E26" stroke-width="2" fill="none" stroke-dasharray="5 5"/><rect x="290" y="150" width="170" height="146" rx="12" fill="#FDFBF7" stroke="#4F5E26" stroke-width="1.5"/><text x="308" y="182" font-family="Georgia,serif" font-size="15" fill="#4F5E26" letter-spacing="2">RULE R5</text><rect x="308" y="198" width="124" height="7" rx="3.5" fill="#1A1A1A"/><rect x="308" y="214" width="134" height="7" rx="3.5" fill="#BDB7A6"/><rect x="308" y="230" width="100" height="7" rx="3.5" fill="#BDB7A6"/><rect x="308" y="256" width="104" height="26" rx="13" fill="#F6ECD2"/><text x="322" y="274" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#7A5410">Needs review</text><circle cx="386" cy="408" r="52" fill="#4F5E26"/><path d="M362 408 l17 17 l30 -34" stroke="#FDFBF7" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+<div class="strip" id="who"><div class="wrap"><p class="eyebrow" style="margin:6px 0 0">Who this is for</p>
+<div><strong>Content creators</strong><span class="sm mut">Get specific, fixable feedback while the draft is still yours.</span></div>
+<div><strong>Brand managers</strong><span class="sm mut">Review a prioritised queue with the evidence already attached.</span></div>
+<div><strong>Compliance and admins</strong><span class="sm mut">Own the rules, the AI settings and the audit trail.</span></div></div></div>
+<section id="how"><div class="wrap"><div class="rv"><p class="eyebrow">Chapter one</p><h2>From rulebook to decision, in three steps.</h2></div>
+<div class="pair rv"><div><div class="num">01</div><h3>Teach it the brand once.</h3><p class="mut">Admins enter approved facts, prohibited phrases, required disclaimers and their sources. Every rule has an owner, a severity and a switch.</p></div>
+<div class="art"><svg viewBox="0 0 400 300" role="img" aria-label="Three stacked rule cards"><rect width="400" height="300" fill="#F4EFE4"/><g stroke="#E4DFD3"><rect x="60" y="40" width="270" height="62" rx="10" fill="#fff"/><rect x="82" y="108" width="270" height="62" rx="10" fill="#fff"/><rect x="104" y="176" width="240" height="62" rx="10" fill="#fff" stroke="#4F5E26" stroke-width="1.5"/></g><circle cx="90" cy="71" r="9" fill="#4F5E26"/><circle cx="112" cy="139" r="9" fill="#9AA66B"/><circle cx="134" cy="207" r="9" fill="#4F5E26"/><g fill="#CFC9B8"><rect x="112" y="58" width="130" height="8" rx="4"/><rect x="112" y="76" width="90" height="7" rx="3.5"/><rect x="134" y="126" width="120" height="8" rx="4"/><rect x="134" y="144" width="150" height="7" rx="3.5"/><rect x="156" y="194" width="110" height="8" rx="4"/><rect x="156" y="212" width="130" height="7" rx="3.5"/></g></svg></div></div>
+<div class="pair flip rv"><div><div class="num">02</div><h3>Rules catch the known. AI reads the context.</h3><p class="mut">Exact checks find banned wording and missing disclaimers. The AI reviews claims against your approved facts, and anything it cannot verify is labelled needs verification instead of guessed.</p></div>
+<div class="art"><svg viewBox="0 0 400 300" role="img" aria-label="Rule checks and AI analysis merging into one list of findings"><rect width="400" height="300" fill="#EEF0DF"/><rect x="34" y="62" width="96" height="52" rx="26" fill="#fff" stroke="#4F5E26"/><text x="82" y="94" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" fill="#1A1A1A">Rules</text><rect x="34" y="186" width="96" height="52" rx="26" fill="#fff" stroke="#33446B"/><text x="82" y="218" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" fill="#1A1A1A">AI</text><path d="M130 88 C 180 88 170 150 210 150 M130 212 C 180 212 170 150 210 150" stroke="#1A1A1A" stroke-width="1.5" fill="none"/><circle cx="214" cy="150" r="7" fill="#1A1A1A"/><rect x="238" y="70" width="136" height="160" rx="12" fill="#fff" stroke="#E4DFD3"/><g><rect x="254" y="90" width="104" height="24" rx="6" fill="#F7E1DC"/><rect x="254" y="124" width="104" height="24" rx="6" fill="#F6ECD2"/><rect x="254" y="158" width="104" height="24" rx="6" fill="#F6ECD2"/><rect x="254" y="192" width="70" height="24" rx="6" fill="#E8F0DD"/></g></svg></div></div>
+<div class="pair rv"><div><div class="num">03</div><h3>A person decides, and the record shows who.</h3><p class="mut">Managers approve, request changes or reject. Approving content that still has open findings requires a written reason, and every action lands in the audit log.</p></div>
+<div class="art"><svg viewBox="0 0 400 300" role="img" aria-label="Approve, request changes and reject actions above a short history log"><rect width="400" height="300" fill="#F4EFE4"/><rect x="50" y="40" width="300" height="220" rx="14" fill="#fff" stroke="#E4DFD3"/><rect x="74" y="64" width="78" height="38" rx="19" fill="#4F5E26"/><rect x="162" y="64" width="98" height="38" rx="19" fill="none" stroke="#1A1A1A"/><rect x="270" y="64" width="58" height="38" rx="19" fill="none" stroke="#1A1A1A"/><g fill="#DDD7C8"><rect x="74" y="132" width="250" height="7" rx="3.5"/><rect x="74" y="156" width="210" height="7" rx="3.5"/><rect x="74" y="180" width="230" height="7" rx="3.5"/><rect x="74" y="204" width="160" height="7" rx="3.5"/></g><circle cx="318" cy="222" r="22" fill="none" stroke="#4F5E26" stroke-width="2"/><path d="M308 222 l7 7 l13 -15" stroke="#4F5E26" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div></div></section>
+<section id="voices" style="background:var(--sand);border-top:1px solid var(--line)"><div class="wrap"><div class="rv"><p class="eyebrow">Chapter two</p><h2>The people we are building for.</h2>
+<p class="mut" style="max-width:680px">These are illustrative personas based on the user groups in our research plan. They are composite scenarios, not testimonials. Real interviews are still to come.</p></div>
+<div class="quotes">
+<div class="q rv"><figure><svg viewBox="0 0 120 120" role="img" aria-label="Illustrated portrait of a content creator"><rect width="120" height="120" fill="#E3E8C9"/><path d="M14 120 C 18 88 40 82 60 82 C 80 82 102 88 106 120Z" fill="#4F5E26"/><rect x="51" y="66" width="18" height="20" fill="#B9825F"/><ellipse cx="60" cy="52" rx="23" ry="27" fill="#C68E6B"/><path d="M36 50 C 34 24 50 18 62 20 C 78 20 88 32 84 52 C 80 40 70 34 58 36 C 46 36 38 42 36 50Z" fill="#1A1A1A"/></svg><figcaption><b>Content creator</b><br><span class="mut">Illustrative persona</span></figcaption></figure><blockquote>I do not need a lecture. I need to know which line is the problem and what to write instead.</blockquote></div>
+<div class="q rv"><figure><svg viewBox="0 0 120 120" role="img" aria-label="Illustrated portrait of a brand manager"><rect width="120" height="120" fill="#F0E6D4"/><path d="M12 120 C 16 88 40 82 60 82 C 80 82 104 88 108 120Z" fill="#1A1A1A"/><rect x="51" y="66" width="18" height="20" fill="#E3B592"/><path d="M34 60 C 28 24 46 14 60 14 C 76 14 94 24 86 60 L 90 92 C 80 84 82 60 80 52 L 40 52 C 38 62 38 84 30 92Z" fill="#6B4A2F"/><ellipse cx="60" cy="54" rx="22" ry="26" fill="#F0C9A8"/><path d="M38 46 C 40 30 56 26 66 28 C 78 30 84 38 82 48 C 74 38 52 36 38 46Z" fill="#6B4A2F"/></svg><figcaption><b>Brand manager</b><br><span class="mut">Illustrative persona</span></figcaption></figure><blockquote>If it points to the exact rule, I can decide in a minute instead of hunting through three documents.</blockquote></div>
+<div class="q rv"><figure><svg viewBox="0 0 120 120" role="img" aria-label="Illustrated portrait of a compliance reviewer"><rect width="120" height="120" fill="#DCE3EC"/><path d="M12 120 C 16 88 40 82 60 82 C 80 82 104 88 108 120Z" fill="#A5622F"/><rect x="51" y="66" width="18" height="20" fill="#7A4A30"/><circle cx="60" cy="22" r="13" fill="#1A1A1A"/><ellipse cx="60" cy="54" rx="22" ry="26" fill="#8D5A3C"/><path d="M38 48 C 38 30 52 28 60 28 C 72 28 84 32 82 48 C 76 38 46 38 38 48Z" fill="#1A1A1A"/></svg><figcaption><b>Compliance reviewer</b><br><span class="mut">Illustrative persona</span></figcaption></figure><blockquote>AI can raise the flag. A person with a name should be the one who signs.</blockquote></div></div></div></section>
+<section class="priv" id="privacy"><div class="wrap"><div class="rv"><p class="eyebrow">Chapter three</p><h2>Built to keep confidential drafts confidential.</h2><p>Brand material is sensitive, so the checker is held to the same standard as the content it checks.</p></div>
+<ul class="rv"><li><b>Your key stays on the server.</b><span>The browser never sees the AI credential. Requests go to this site's own endpoint.</span></li>
+<li><b>Only what is needed is sent.</b><span>The AI receives the draft, the active rules and a strictness setting. Nothing about the visitor.</span></li>
+<li><b>No trackers, no cookies, no third-party fonts.</b><span>The page loads nothing from other sites. Your reading is not shared with anyone.</span></li>
+<li><b>Data stays in your browser.</b><span>Submissions and history live in local storage on this device. One button deletes them.</span></li>
+<li><b>The endpoint does not store drafts.</b><span>It forwards the request and returns the result without logging draft text.</span></li>
+<li><b>Use fictional content for now.</b><span>The AI provider processes drafts, so check its retention terms before using real confidential material.</span></li></ul></div></section>
+<section class="demo" id="demo"><div class="wrap"><div class="rv"><p class="eyebrow">Chapter four</p><h2>Try the workspace.</h2><p class="mut" style="max-width:640px">A working prototype with a fictional brand (the AquaPulse smart bottle). Pick a role, then follow a draft from check to decision.</p></div>
+<div class="apphead"><span id="who" class="mut" aria-live="polite"></span><button id="sw" style="display:none">Switch role</button></div><div id="app"></div></div></section>
+</main>
+<footer><div class="wrap"><span>B-Secure is a prototype. It supports review and does not guarantee compliance or publish anything.</span><span class="sp"></span><button id="wipe">Delete my stored data</button></div></footer>
+<script>
+document.documentElement.classList.add('js');
+
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const SEED_RULES=[
+{id:'R1',name:'No medical claims',category:'Unsupported claim',severity:'High',type:'phrase',patterns:['cure','clinically proven','heals','treats'],description:'AquaPulse is a hydration bottle, not a medical product.',source:'Brand Guidelines v1 §2',suggestion:'Describe hydration reminders, not health outcomes.',active:true},
+{id:'R2',name:'No absolute promises',category:'Misleading claim',severity:'High',type:'phrase',patterns:['guaranteed','100% safe','best in the world'],description:'Avoid absolute guarantees and superlatives.',source:'Brand Guidelines v1 §3',suggestion:'Use a specific, verifiable statement instead.',active:true},
+{id:'R3',name:'Correct product name',category:'Terminology',severity:'Medium',type:'phrase',patterns:['Aqua Pulse','Aqua-Pulse'],description:'The product is always written "AquaPulse".',source:'Style Guide §1',suggestion:'Write "AquaPulse".',active:true},
+{id:'R4',name:'Battery disclaimer',category:'Missing disclaimer',severity:'Medium',type:'required',trigger:'battery',patterns:['Battery life varies with usage.'],description:'Any battery mention needs the standard disclaimer.',source:'Legal Notes §4',suggestion:'Add: "Battery life varies with usage."',active:true},
+{id:'R5',name:'Approved product facts',category:'Factual accuracy',severity:'High',type:'fact',patterns:[],description:'AquaPulse holds 750 ml, is BPA-free, battery lasts up to 14 days, water resistance is IP67 (splash and brief immersion only, NOT for diving), and it is NOT dishwasher safe.',source:'Product Spec Sheet 2026',suggestion:'Match the approved specification.',active:true},
+{id:'R6',name:'No competitor naming',category:'Tone & policy',severity:'Medium',type:'fact',patterns:[],description:'Never name competitors (e.g. HydroSmart) or make direct comparisons. Tone should be friendly and plain.',source:'Brand Guidelines v1 §5',suggestion:'Focus on AquaPulse strengths without comparisons.',active:true}];
+const SAMPLES={
+'Clean draft':'Meet AquaPulse, the 750 ml bottle that gently reminds you to drink. It is BPA-free, with a battery that lasts up to 14 days. Battery life varies with usage.',
+'Rule violations':'Aqua Pulse is clinically proven to cure dehydration and is guaranteed to be 100% safe for everyone!',
+'Unsupported claims':'AquaPulse is fully waterproof, so take it scuba diving, and it is dishwasher safe. It also keeps drinks cold for 3 days.',
+'Mixed issues':'Our Aqua Pulse battery lasts a whole month and beats HydroSmart every single time.'};
+let S={rules:SEED_RULES,subs:[],log:[],settings:{ai:true,strict:'balanced',escalate:true},n:1};
+try{const x=JSON.parse(localStorage.getItem('bsecure-demo-v1')||'null');if(x&&x.rules)S=x}catch(e){}
+const save=()=>{try{localStorage.setItem('bsecure-demo-v1',JSON.stringify(S))}catch(e){}};
+const log=(role,act)=>{S.log.unshift({t:new Date().toLocaleString(),role,act});S.log=S.log.slice(0,80);save()};
+let V={role:null,tab:'',busy:false,cur:null,draft:'',sel:null,aiNote:''};
+const sampleFn=true;
+
+const ROLES={creator:{n:'Creator',i:'<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l4-1 11-11a2.1 2.1 0 00-3-3L5 16l-1 4z"/><path d="M14 7l3 3"/></svg>',tabs:['Check content','My submissions']},manager:{n:'Manager',i:'<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4h6v3H9z"/><path d="M7 5H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1"/><path d="M8.5 14l2.5 2.5 4.5-5"/></svg>',tabs:['Review queue','Insights']},admin:{n:'Admin',i:'<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg>',tabs:['Brand rules','AI & policy','Audit log','Insights']}};
+
+function ruleCheck(text){
+ const out=[];let k=1;const low=text.toLowerCase();
+ S.rules.filter(r=>r.active).forEach(r=>{
+  if(r.type==='phrase')r.patterns.forEach(p=>{const m=new RegExp('(^|[^a-z0-9])'+p.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'(?![a-z0-9])','i').exec(text);const i=m?m.index+m[1].length:-1;if(i>=0)out.push(mk(r,text.substr(i,p.length),`The text contains "${p}", which the rule "${r.name}" does not allow.`,'Needs review','rule'))});
+  if(r.type==='required'&&r.trigger&&low.includes(r.trigger.toLowerCase())&&!r.patterns.every(p=>low.includes(p.toLowerCase()))){const i=low.indexOf(r.trigger.toLowerCase());out.push(mk(r,text.substr(i,r.trigger.length),`"${r.trigger}" is mentioned but the required wording is missing.`,'Needs review','rule'))}
+ });
+ return out;
+ function mk(r,m,e,st,o){return{id:'F'+(k++),origin:o,category:r.category,severity:r.severity,matchedText:m,explanation:e,ruleId:r.id,source:r.source,suggestion:r.suggestion,status:st}}
+}
+async function aiCheck(text,ruleFindings){
+ const rules=S.rules.filter(r=>r.active).map(r=>({id:r.id,name:r.name,description:r.description,source:r.source}));
+ const res=await fetch('/api/check',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({content:text,rules,found:ruleFindings.map(f=>f.matchedText),strict:S.settings.strict})});
+ if(!res.ok)throw Object.assign(new Error('http'),{code:res.status});
+ const r=await res.json();
+ const ids=new Set(S.rules.map(x=>x.id));const low=text.toLowerCase();
+ const fs=(r.findings||[]).filter(f=>f&&f.matchedText&&low.includes(String(f.matchedText).toLowerCase())).map((f,i)=>{
+  const ok=f.ruleId&&ids.has(f.ruleId);const rule=ok&&S.rules.find(x=>x.id===f.ruleId);
+  return{id:'A'+(i+1),origin:'ai',category:f.category||'AI finding',severity:['Low','Medium','High'].includes(f.severity)?f.severity:'Medium',matchedText:f.matchedText,explanation:f.explanation||'',ruleId:ok?f.ruleId:null,source:ok?rule.source:null,suggestion:f.suggestion||'',status:ok&&f.status!=='Needs verification'?'Needs review':'Needs verification'}});
+ return{findings:fs,rewrite:String(r.rewrite||''),risk:Math.max(0,Math.min(100,+r.riskScore||0))};
+}
+async function runCheck(){
+ const text=V.draft.trim();if(!text)return;
+ V.busy=true;V.cur=null;V.aiNote='';render();
+ const rf=ruleCheck(text);let af=[],rewrite='',risk=null;
+ if(S.settings.ai&&sampleFn){try{const a=await aiCheck(text,rf);af=a.findings;rewrite=a.rewrite;risk=a.risk}catch(e){V.aiNote='AI analysis was unavailable ('+(e.code||'error')+'). Showing rule-based findings only.'}}
+ else V.aiNote=S.settings.ai?'AI is not available in this view. Showing rule-based findings only.':'AI analysis is turned off by an Admin. Showing rule-based findings only.';
+ const all=[...rf,...af];
+ if(risk===null)risk=Math.min(100,all.reduce((s,f)=>s+({High:35,Medium:20,Low:8}[f.severity]||10),0));
+ V.cur={text,findings:all,rewrite,risk};V.busy=false;render();
+}
+function submitDraft(){
+ const c=V.cur;if(!c)return;
+ const esc_=S.settings.escalate&&c.findings.some(f=>f.severity==='High'||f.status==='Needs verification');
+ const prev=V.resubmit?S.subs.find(s=>s.id===V.resubmit):null;
+ const sub={id:prev?prev.id:'S'+(S.n++),rev:prev?prev.rev+1:1,text:c.text,findings:c.findings,rewrite:c.rewrite,risk:c.risk,status:'Pending',escalated:esc_,comment:'',history:prev?prev.history:[]};
+ sub.history.push({t:new Date().toLocaleString(),by:'Creator',act:'Submitted revision '+sub.rev});
+ if(prev)S.subs[S.subs.indexOf(prev)]=sub;else S.subs.unshift(sub);
+ log('Creator','Submitted '+sub.id+' rev '+sub.rev+(esc_?' (escalated)':''));
+ V.cur=null;V.draft='';V.resubmit=null;V.tab='My submissions';render();
+}
+function decide(id,status){
+ const s=S.subs.find(x=>x.id===id);const note=($('#note')||{}).value||'';
+ if((status==='Approved'&&s.findings.length&&!note.trim())){alert('Approving content that still has findings needs a documented reason (override).');return}
+ s.status=status;s.comment=note;s.history.push({t:new Date().toLocaleString(),by:'Manager',act:status+(note?': '+note:'')});
+ log('Manager',status+' '+id+' rev '+s.rev+(note&&status==='Approved'&&s.findings.length?' (override)':''));save();V.sel=null;render();
+}
+
+const badge=(c,t)=>`<span class="badge ${c}">${esc(t||c)}</span>`;
+const stClass=s=>s==='Needs review'||s==='Needs verification'?'Needs':s==='Changes requested'?'Changes':s;
+function hl(text,fs){let h=esc(text);fs.forEach(f=>{const m=esc(f.matchedText);h=h.replace(m,`<mark>${m}</mark>`)});return h}
+function fcard(f){return`<div class="f ${f.severity}"><div class="tags">${badge(f.severity)}${badge(f.origin==='ai'?'ai':'rule',f.origin==='ai'?'AI analysis':'Rule check')}${badge(stClass(f.status),f.status)}<span class="badge">${esc(f.category)}</span></div>
+<p style="margin-bottom:6px"><mark>${esc(f.matchedText)}</mark></p><p style="margin-bottom:6px">${esc(f.explanation)}</p>
+<p class="mut sm" style="margin-bottom:0">${f.ruleId?`Evidence: <b>${esc(f.ruleId)}</b> · ${esc(f.source)}`:'No approved evidence found, so this needs human verification.'}</p>
+${f.suggestion?`<div class="sug"><b>Suggested fix:</b> ${esc(f.suggestion)}</div>`:''}</div>`}
+const riskBadge=r=>r>=60?badge('High','Risk '+r):r>=30?badge('Medium','Risk '+r):badge('clean','Risk '+r);
+
+function creatorCheck(){
+ const c=V.cur;
+ return`<div class="two"><div class="card"><h3>${V.resubmit?'Revise and resubmit '+V.resubmit:'Check your draft'}</h3>
+<p class="mut sm">Paste marketing text. Rules run first, then AI reviews context and claims. Nothing is published automatically.</p>
+<textarea id="draft" maxlength="2000" placeholder="Paste a social post, ad copy or product description...">${esc(V.draft)}</textarea>
+<div class="row" style="margin:10px 0">${Object.keys(SAMPLES).map(k=>`<button class="chip" data-act="sample" data-k="${esc(k)}">${esc(k)}</button>`).join('')}</div>
+<button class="pri" data-act="check" ${V.busy?'disabled':''}>${V.busy?'<span class="spin"></span>Checking...':'Check content'}</button></div>
+<div class="card"><h3>Results</h3>${V.busy?'<div class="scan"><div class="beam"></div><p><b>Scanning your draft</b></p><p class="mut sm" style="margin:0">Step 1: rule engine. Step 2: AI reviews claims against approved facts.</p></div>':!c?'<p class="mut">Results will appear here. Try a sample draft on the left.</p>':`
+${V.aiNote?`<div class="note">${esc(V.aiNote)}</div>`:''}
+<div class="row" style="margin-bottom:8px">${riskBadge(c.risk)}<span class="mut sm">${c.findings.length} finding(s)</span></div><div class="bartrack gauge" style="margin-bottom:16px"><i style="width:${c.risk}%;background:${c.risk>=60?'var(--bad)':c.risk>=30?'var(--warn)':'var(--ok)'}"></i></div>
+<p style="line-height:1.8">${hl(c.text,c.findings)}</p>
+${c.findings.length?c.findings.map(fcard).join(''):`<div class="f" style="border-left-color:var(--ok)"><b>No issues found.</b> This draft matches the active rules. It still needs manager approval.</div>`}
+${c.rewrite&&c.findings.length?`<h4 style="margin-top:14px">AI-suggested rewrite</h4><div class="sug" style="font-size:16px">${esc(c.rewrite)}</div><p class="mut sm">Your original is never overwritten.</p><button class="chip" data-act="userw">Use rewrite as my draft</button> `:''}
+<div style="margin-top:14px"><button class="pri" data-act="submit">Submit for manager review</button></div>`}</div></div>`}
+
+function subRow(s,mgr){return`<tr><td><b>${s.id}</b> <span class="mut sm">rev ${s.rev}</span></td><td>${esc(s.text.slice(0,90))}${s.text.length>90?'…':''}</td><td>${badge(stClass(s.status),s.status)} ${s.escalated&&s.status==='Pending'?badge('High','Escalated'):''}</td><td>${riskBadge(s.risk)}</td><td>${mgr?`<button data-act="open" data-id="${s.id}">Review</button>`:`<button data-act="view" data-id="${s.id}">Details</button>`}</td></tr>`}
+function mySubs(){
+ if(V.sel){const s=S.subs.find(x=>x.id===V.sel);return detail(s,false)}
+ return`<div class="card"><h3>My submissions</h3>${S.subs.length?`<table><tr><th>ID</th><th>Content</th><th>Status</th><th>Risk</th><th></th></tr>${S.subs.map(s=>subRow(s,false)).join('')}</table>`:'<p class="mut">No submissions yet. Check a draft and submit it for review.</p>'}</div>`}
+function detail(s,mgr){
+ const hist=s.history.map(h=>`<tr><td class="sm">${esc(h.t)}</td><td>${esc(h.by)}</td><td>${esc(h.act)}</td></tr>`).join('');
+ return`<div class="card"><button data-act="back">Back</button><h3 style="margin-top:14px">${s.id} · revision ${s.rev} ${badge(stClass(s.status),s.status)} ${s.escalated&&s.status==='Pending'?badge('High','Escalated: high risk or unverified claim'):''}</h3>
+<p style="line-height:1.8">${hl(s.text,s.findings)}</p>
+${s.findings.length?s.findings.map(fcard).join(''):'<div class="f" style="border-left-color:var(--ok)">No findings.</div>'}
+${s.rewrite&&s.findings.length?`<h4>AI-suggested rewrite</h4><div class="sug" style="font-size:16px">${esc(s.rewrite)}</div>`:''}
+${mgr&&s.status==='Pending'?`<label for="note">Decision note ${s.findings.length?'(required to approve with open findings)':'(optional)'}</label><textarea id="note" style="min-height:70px"></textarea>
+<div class="row" style="margin-top:12px"><button class="ok" data-act="dec" data-id="${s.id}" data-s="Approved">Approve</button><button data-act="dec" data-id="${s.id}" data-s="Changes requested">Request changes</button><button class="bad" data-act="dec" data-id="${s.id}" data-s="Rejected">Reject</button></div>`:''}
+${!mgr&&(s.status==='Changes requested'||s.status==='Rejected')?`<div class="note"><b>Manager note:</b> ${esc(s.comment||'No note.')}</div><button class="pri" data-act="revise" data-id="${s.id}">Revise and resubmit</button>`:''}
+<h4 style="margin-top:18px">History</h4><table>${hist}</table></div>`}
+
+function queue(){
+ if(V.sel)return detail(S.subs.find(x=>x.id===V.sel),true);
+ const p=S.subs.filter(s=>s.status==='Pending').sort((a,b)=>(b.escalated-a.escalated)||b.risk-a.risk),d=S.subs.filter(s=>s.status!=='Pending');
+ return`<div class="card"><h3>Pending review (${p.length})</h3><p class="mut sm">Escalated items (high severity or unverified claims) appear first.</p>${p.length?`<table><tr><th>ID</th><th>Content</th><th>Status</th><th>Risk</th><th></th></tr>${p.map(s=>subRow(s,true)).join('')}</table>`:'<p class="mut">Queue is empty. Switch to Creator and submit a draft.</p>'}</div>
+${d.length?`<div class="card"><h3>Decided</h3><table><tr><th>ID</th><th>Content</th><th>Status</th><th>Risk</th><th></th></tr>${d.map(s=>subRow(s,true)).join('')}</table></div>`:''}`}
+
+function insights(){
+ const cats={};S.subs.forEach(s=>s.findings.forEach(f=>cats[f.category]=(cats[f.category]||0)+1));
+ const mx=Math.max(1,...Object.values(cats));const cnt=t=>S.subs.filter(s=>s.status===t).length;
+ const ai=S.subs.reduce((n,s)=>n+s.findings.filter(f=>f.origin==='ai').length,0),rl=S.subs.reduce((n,s)=>n+s.findings.filter(f=>f.origin==='rule').length,0);
+ return`<div class="grid3" style="margin-top:0">${[['Submissions',S.subs.length],['Pending',cnt('Pending')],['Approved',cnt('Approved')],['Rule vs AI findings',rl+' / '+ai]].map(x=>`<div class="card"><div class="mut sm">${x[0]}</div><div class="stat">${x[1]}</div></div>`).join('')}</div>
+<div class="card"><h3>Recurring issue categories</h3>${Object.keys(cats).length?Object.entries(cats).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<div style="margin-bottom:12px"><div class="row"><span>${esc(k)}</span><span class="sp"></span><b>${v}</b></div><div class="bartrack"><i style="width:${v/mx*100}%"></i></div></div>`).join(''):'<p class="mut">Submit drafts to see patterns here.</p>'}</div>`}
+
+function rulesAdmin(){
+ return`<div class="card"><h3>Brand rules and approved facts</h3><p class="mut sm">Active rules feed both the rule engine and the AI reviewer. Changes apply to the next check.</p>
+<table><tr><th>ID</th><th>Rule</th><th>Type</th><th>Severity</th><th>Active</th><th></th></tr>${S.rules.map(r=>`<tr><td>${esc(r.id)}</td><td><b>${esc(r.name)}</b><div class="mut sm">${esc(r.description)}</div>${r.patterns.length?`<div class="sm">Patterns: ${esc(r.patterns.join(', '))}</div>`:''}</td><td>${r.type==='fact'?'Approved fact (AI)':r.type==='required'?'Required text':'Prohibited phrase'}</td><td>${badge(r.severity)}</td>
+<td><input type="checkbox" style="width:20px;height:20px" data-act="tog" data-id="${r.id}" ${r.active?'checked':''} aria-label="Active"></td><td><button data-act="delr" data-id="${r.id}">Delete</button></td></tr>`).join('')}</table></div>
+<div class="card"><h3>Add a rule</h3><div class="two"><div><label for="rn">Name</label><input id="rn" placeholder="e.g. No price promises">
+<label for="rt">Type</label><select id="rt"><option value="phrase">Prohibited phrase</option><option value="fact">Approved fact / policy (AI checks it)</option></select>
+<label for="rs">Severity</label><select id="rs"><option>High</option><option selected>Medium</option><option>Low</option></select></div>
+<div><label for="rp">Phrases (comma separated, for prohibited phrase)</label><input id="rp" placeholder="cheapest, free forever">
+<label for="rd">Description / fact text</label><textarea id="rd" style="min-height:90px" placeholder="What is the rule or approved fact?"></textarea>
+<label for="rso">Source</label><input id="rso" placeholder="Where does this come from?"></div></div><div style="margin-top:14px"><button class="pri" data-act="addr">Add rule</button></div></div>`}
+function policy(){
+ const st=S.settings;
+ return`<div class="card"><h3>AI and review policy</h3>
+<div class="sw"><input type="checkbox" id="sai" data-act="set" ${st.ai?'checked':''}><label for="sai" style="margin:0">Enable AI analysis (otherwise only rule checks run)</label></div>
+<label for="sst">AI strictness</label><select id="sst" data-act="set" style="max-width:320px">${['lenient','balanced','strict'].map(o=>`<option ${st.strict===o?'selected':''}>${o}</option>`).join('')}</select>
+<div class="sw" style="margin-top:16px"><input type="checkbox" id="ses" data-act="set" ${st.escalate?'checked':''}><label for="ses" style="margin:0">Escalate high-severity and unverified findings to the top of the manager queue</label></div>
+<p class="mut sm" style="margin-top:14px">AI availability in this view: <b>${sampleFn?'server endpoint':'not available'}</b>. AI output is validated: rule IDs must exist, matched text must appear in the draft, and unsupported claims are labelled "Needs verification".</p></div>
+<div class="card"><h3>Permissions</h3><table><tr><th>Capability</th><th>Creator</th><th>Manager</th><th>Admin</th></tr>
+${[['Submit and check drafts','Yes','No','Yes'],['Revise and resubmit','Yes','No','No'],['Approve, reject, request changes','No','Yes','No'],['Override with reason','No','Yes','No'],['Edit rules and facts','No','No','Yes'],['Configure AI and policy','No','No','Yes'],['View audit log','No','No','Yes'],['View insights','No','Yes','Yes']].map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('')}</table></div>`}
+function auditPage(){return`<div class="card"><h3>Audit log</h3>${S.log.length?`<table><tr><th>Time</th><th>Role</th><th>Action</th></tr>${S.log.map(l=>`<tr><td class="sm">${esc(l.t)}</td><td>${esc(l.role)}</td><td>${esc(l.act)}</td></tr>`).join('')}</table>`:'<p class="mut">No activity yet.</p>'}<p class="mut sm">Demo note: data is stored in this browser only.</p><button data-act="reset">Reset demo data</button></div>`}
+
+function render(){
+ const A=$('#app');A.classList.remove('view');void A.offsetWidth;A.classList.add('view');$('#who').textContent=V.role?'Role: '+ROLES[V.role].n:'';$('#sw').style.display=V.role?'':'none';
+ if(!V.role){
+  A.innerHTML=`<h3>Choose a role to explore</h3><p class="mut">Each role sees different tools. No real content is needed.</p>
+<div class="grid3">${[['creator','Submit drafts, get AI and rule feedback with evidence, revise and resubmit.',['Check text against brand rules','See suggested corrections','Track review status']],['manager','Review flagged content and make the final human decision.',['Prioritised review queue','Approve, reject or request changes','Override with a recorded reason']],['admin','Control the brand knowledge, AI behaviour and governance.',['Manage rules and approved facts','Configure AI strictness and escalation','Audit log and permissions']]].map(r=>`<button class="card role" data-act="role" data-r="${r[0]}"><div class="ico">${ROLES[r[0]].i}</div><h3>${ROLES[r[0]].n}</h3><p class="mut">${r[1]}</p><ul>${r[2].map(x=>`<li>${x}</li>`).join('')}</ul><span class="badge ai">Enter as ${ROLES[r[0]].n}</span></button>`).join('')}</div>
+<p class="mut sm" style="margin-top:20px">AI assists the review and never publishes content. Findings without approved evidence are labelled "Needs verification".</p>`;return}
+ const R=ROLES[V.role];if(!R.tabs.includes(V.tab))V.tab=R.tabs[0];
+ let body='';const t=V.tab;
+ if(t==='Check content')body=creatorCheck();else if(t==='My submissions')body=mySubs();else if(t==='Review queue')body=queue();else if(t==='Insights')body=insights();else if(t==='Brand rules')body=rulesAdmin();else if(t==='AI & policy')body=policy();else if(t==='Audit log')body=auditPage();
+ A.innerHTML=`<h3>${R.n} workspace</h3><div class="tabs">${R.tabs.map(x=>`<button class="tab ${x===t?'on':''}" data-act="tab" data-t="${esc(x)}">${x}${x==='Review queue'?' ('+S.subs.filter(s=>s.status==='Pending').length+')':''}</button>`).join('')}</div>${body}`;
+}
+document.addEventListener('input',e=>{if(e.target.id==='draft')V.draft=e.target.value});
+document.addEventListener('change',e=>{
+ const a=e.target.dataset.act;
+ if(a==='tog'){const r=S.rules.find(x=>x.id===e.target.dataset.id);r.active=e.target.checked;log('Admin',(r.active?'Enabled ':'Disabled ')+r.id);save();render()}
+ if(a==='set'){S.settings={ai:$('#sai').checked,strict:$('#sst').value,escalate:$('#ses').checked};log('Admin','Updated AI and policy settings');save();render()}
+});
+$('#sw').onclick=()=>{V.role=null;V.sel=null;V.cur=null;render()};
+document.addEventListener('click',e=>{
+ const b=e.target.closest('[data-act]');if(!b||b.type==='checkbox'||b.tagName==='SELECT')return;const d=b.dataset;
+ switch(d.act){
+  case'role':V.role=d.r;V.tab='';V.sel=null;break;
+  case'tab':V.tab=d.t;V.sel=null;break;
+  case'sample':V.draft=SAMPLES[d.k];V.cur=null;V.aiNote='';break;
+  case'check':return runCheck();
+  case'submit':return submitDraft();
+  case'userw':V.draft=V.cur.rewrite;V.cur=null;break;
+  case'open':case'view':V.sel=d.id;break;
+  case'back':V.sel=null;break;
+  case'dec':return decide(d.id,d.s);
+  case'revise':{const s=S.subs.find(x=>x.id===d.id);V.draft=s.text;V.resubmit=s.id;V.cur=null;V.sel=null;V.tab='Check content';break}
+  case'delr':if(confirm('Delete this rule?')){log('Admin','Deleted rule '+d.id);S.rules=S.rules.filter(r=>r.id!==d.id);save()}break;
+  case'addr':{const n=$('#rn').value.trim(),ds=$('#rd').value.trim();if(!n||!ds){alert('Name and description are required.');return}
+   const t=$('#rt').value,ps=$('#rp').value.split(',').map(x=>x.trim()).filter(Boolean);
+   if(t==='phrase'&&!ps.length){alert('Add at least one phrase.');return}
+   const id='R'+(Math.max(0,...S.rules.map(r=>+r.id.slice(1)))+1);
+   S.rules.push({id,name:n,category:t==='fact'?'Policy / fact':'Prohibited wording',severity:$('#rs').value,type:t,patterns:t==='phrase'?ps:[],description:ds,source:$('#rso').value.trim()||'Admin entry',suggestion:'Revise to follow rule '+id+'.',active:true});
+   log('Admin','Added rule '+id+' ('+n+')');save();break}
+  case'reset':if(confirm('Reset all demo data?')){try{localStorage.removeItem('bsecure-demo-v1')}catch(x){}S={rules:SEED_RULES,subs:[],log:[],settings:{ai:true,strict:'balanced',escalate:true},n:1}}break;
+ }
+ render();
+});
+render();
+
+const io='IntersectionObserver' in window?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12}):null;
+document.querySelectorAll('.rv').forEach(el=>io?io.observe(el):el.classList.add('in'));
+document.getElementById('wipe').onclick=()=>{if(confirm('Delete all demo data stored in this browser?')){try{localStorage.removeItem('bsecure-demo-v1')}catch(x){}S={rules:SEED_RULES,subs:[],log:[],settings:{ai:true,strict:'balanced',escalate:true},n:1};V.cur=null;V.draft='';V.sel=null;V.role=null;render()}};
+</script></body></html>
