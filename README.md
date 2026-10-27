@@ -207,12 +207,33 @@ The following items were identified during prototype planning and are planned fo
 
 ---
 
-## 12. Team & License
+## 12. AI Assistance & Development Tools
+
+AI-assisted tools were used during the development of B-Secure to support implementation, debugging, problem-solving, and documentation.
+
+- **Antigravity:** Assisted with development tasks, code changes, debugging, and project integration.
+- **ChatGPT:** Assisted with problem analysis, project planning, technical explanations, and documentation review.
+- **Additional AI tools:** [List other tools actually used and briefly describe their contributions.]
+
+AI assistance was used as a development aid. The project was reviewed and tested by the team, and responsibility for the final implementation, testing, and submission remains with the team.
+
+### AI Used in the Application
+
+B-Secure also uses the Groq API with a configured language model for AI-assisted content analysis and rewrite suggestions. This is separate from the AI tools used to develop the project.
+
+AI-generated findings may be incomplete or incorrect. B-Secure therefore keeps human reviewers responsible for final content decisions.
+
+---
+
+## 13. Team & License
 
 ### Team amitheswarm
 - **Amitheswar M** — Frontend architecture, zero-build application design, role-based workflow state machine, client persistence, and user experience.
 - **Sujan T** — Backend serverless architecture (`api/check.js`), Groq API integration, security guardrails, rate limiting, and prompt engineering.
 - **Amrithaa M** — Test suite development (AquaPulse brand guidelines and test cases), persona testing, governance evaluation, and documentation.
+
+AI-generated findings may be incomplete or incorrect. B-Secure therefore keeps human reviewers responsible for final content decisions.
+
 
 ### License Status
 **Undecided.** All rights reserved pending hackathon submission and formal project licensing.
