@@ -213,7 +213,7 @@ AI-assisted tools were used during the development of B-Secure to support implem
 
 - **Antigravity:** Assisted with development tasks, code changes, debugging, and project integration.
 - **ChatGPT:** Assisted with problem analysis, project planning, technical explanations, and documentation review.
-- **Additional AI tools:** [List other tools actually used and briefly describe their contributions.]
+- **Additional AI tools:** Claude, Perplexity(For research).
 
 AI assistance was used as a development aid. The project was reviewed and tested by the team, and responsibility for the final implementation, testing, and submission remains with the team.
 
